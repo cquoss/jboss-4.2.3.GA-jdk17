@@ -7,43 +7,6 @@
 <!-- Initialize the build system. -->
 <target name="_buildmagic:init" unless="init.disable">
 
-  <!-- Make sure we have the right version of Ant -->
-  <property name="buildmagic.ant15.baseversion" value="1.5"/>
-  <property name="buildmagic.ant16.baseversion" value="1.6"/>
-  
-  <!--
-     | Add new conditions for other supported Ant versions when they
-     | become avaialble.
-   -->
-
-  <condition property="buildmagic.ant.compatible">
-    <or>
-      <contains string="${ant.version}"
-        substring="Ant version ${buildmagic.ant15.baseversion}"/>
-      <contains string="${ant.version}"
-        substring="Ant version ${buildmagic.ant16.baseversion}"/>
-    </or>
-  </condition>
-
-  <fail unless="buildmagic.ant.compatible">
-
-  Unsupported Ant version:
-
-    ${ant.version}
-
-  Please install a version which is compatible with Ant ${buildmagic.ant15.baseversion} or ${buildmagic.ant16.baseversion}.
-
-  </fail>
-
-  <!-- JDK Detection -->
-  <available classname="java.lang.StackTraceElement" property="HAVE_JDK_1.4"/>
-  <available classname="java.lang.Enum" property="HAVE_JDK_1.5"/>
-  <available classname="java.lang.management.LockInfo" property="HAVE_JDK_1.6"/>  
-  
-  <fail unless="HAVE_JDK_1.5">
-  Unsupported Java version: You need at least JDK5 to build JBoss4.2
-  </fail>
-
   <!-- Setup the project environment. -->
   <dirname property="project.root" file="${basedir}"/>
   <property name="project.build" value="${project.root}/build"/>
@@ -360,9 +323,8 @@ to build define build-bypass.disabled=true.
     <path refid="dependentmodule.classpath"/>
   </path>
 
-  <!-- This module is based on Java 1.4 -->
-  <property name="javac.target" value="1.4"/>
-  <property name="javac.source" value="1.4"/>
+  <!-- This module is based on Java 17 -->
+  <property name="javac.release" value="17"/>
 
   <!-- RMIC should generate stubs compatible with Java 1.2+ -->
   <property name="rmic.stubVersion" value="1.2"/>
@@ -423,8 +385,7 @@ to build define build-bypass.disabled=true.
 
   <javac destdir="${build.classes}"
     optimize="${javac.optimize}"
-    target="${javac.target}"
-    source="${javac.source}"
+    release="${javac.release}"
     debug="${javac.debug}"
     depend="${javac.depend}"
     verbose="${javac.verbose}"
@@ -511,8 +472,7 @@ to build define build-bypass.disabled=true.
 
   <javac destdir="${build.test}"
     optimize="${javac.optimize}"
-    target="${javac.target}"
-    source="${javac.source}"
+    release="${javac.release}"
     debug="${javac.debug}"
     depend="${javac.depend}"
     verbose="${javac.verbose}"

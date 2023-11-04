@@ -181,7 +181,9 @@
 
     <!-- Skip any missing modules and issue a warning -->
     <property name="executemodules.skipmissing" value="true"/>
-
+      
+    <property name="foo" value="bar">bar</property>
+      
     <!-- The header and footer displayed during each module execution -->
     <property name="executemodules.header"><![CDATA[
     ======================================================================

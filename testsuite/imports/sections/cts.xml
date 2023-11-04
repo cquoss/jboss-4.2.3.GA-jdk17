@@ -71,7 +71,7 @@
          file="${source.java}/org/jboss/test/cts/service/CtsCmpService_V1.txt"
          overwrite="true"/>
       <javac destdir="${build.classes}" optimize="${javac.optimize}"
-         source="${javac.source}" target="${javac.target}"
+         release="${javac.release}"
          debug="${javac.debug}">
          <src path="${build.gen-src}"/>
          <src path="${source.java}"/>
@@ -138,7 +138,7 @@
          file="${source.java}/org/jboss/test/cts/service/CtsCmpService_V2.txt"
          overwrite="true"/>
       <javac destdir="${build.classes}" optimize="${javac.optimize}"
-         source="${javac.source}" target="${javac.target}"
+         release="${javac.release}"
          debug="${javac.debug}">
          <src path="${build.gen-src}"/>
          <src path="${source.java}"/>
